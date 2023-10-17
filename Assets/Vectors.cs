@@ -1,33 +1,16 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Vector
-{
-    public float x = 0f;
-    public float y = 0f;
-
-    public Vector()
-    { }
-    public Vector(float x_value, float y_value)
-    {
-        this.x = x_value;
-        this.y = y_value;
-    }
-}
 
 public class Vectors : MonoBehaviour
 {
-    //public float y = 0;
-    //float YSpeed = -9.8f;
 
-
-    //public float x = 0;
-    //float XSpeed = 5f;
-
-    Vector gravity = new Vector(0, -9.8f);
-    Vector wind = new Vector(5f, 0);
-
+    [SerializeField]
+    private Vector gravity = new Vector(0, -9.8f);
+    [SerializeField]
+    private Vector wind = new Vector(5f, 0);
 
 
     Vector location = new Vector();
@@ -48,11 +31,6 @@ public class Vectors : MonoBehaviour
         input.y = Input.GetAxis("Vertical");
         input = Multiply(input, 12);
         Debug.Log("nyan cat's input magnitude: " + Magnitude(input));
-        /* 
-         y += YSpeed;
-         x += XSpeed;
-         transform.position = new Vector3(x, y, transform.position.z);
-         */
 
         velocity = Add(gravity, wind);
         velocity = Add(velocity, input); // for input
@@ -87,10 +65,21 @@ public class Vectors : MonoBehaviour
         return result;
     }
 
+    Vector Divide(Vector v1, float scalar)
+    {
+        Vector result = new Vector();
+
+        result.x = v1.x / scalar;
+        result.y = v1.y / scalar;
+        return result;
+    }
+
     float Magnitude(Vector v1)
     {
         float result = Mathf.Sqrt((v1.x * v1.x) + (v1.y * v1.y));
         return result;
 
     }
+
+
 }
